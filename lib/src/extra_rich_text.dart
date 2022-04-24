@@ -76,6 +76,7 @@ class ExtraRichText extends MultiChildRenderObjectWidget {
     this.textWidthBasis = TextWidthBasis.parent,
     this.textHeightBehavior,
     this.customEllipsis,
+    this.layoutCallback,
   })  : assert(maxLines == null || maxLines > 0),
         super(key: key, children: _extractChildren(text));
 
@@ -160,6 +161,8 @@ class ExtraRichText extends MultiChildRenderObjectWidget {
 
   final String? customEllipsis;
 
+  final LayoutCallback? layoutCallback;
+
   @override
   RenderExtraParagraph createRenderObject(BuildContext context) {
     assert(textDirection != null || debugCheckHasDirectionality(context));
@@ -176,6 +179,7 @@ class ExtraRichText extends MultiChildRenderObjectWidget {
       textHeightBehavior: textHeightBehavior,
       locale: locale ?? Localizations.maybeLocaleOf(context),
       customEllipsis: customEllipsis,
+      layoutCallback: layoutCallback,
     );
   }
 

@@ -71,6 +71,8 @@ class ParsedText extends StatelessWidget {
 
   final String? customEllipsis;
 
+  final LayoutCallback? layoutCallback;
+
   /// Creates a parsedText widget
   ///
   /// [text] paramtere should not be null and is always required.
@@ -93,6 +95,7 @@ class ParsedText extends StatelessWidget {
     this.selectable = false,
     this.regexOptions = const RegexOptions(),
     this.customEllipsis,
+    this.layoutCallback,
   }) : super(key: key);
 
   @override
@@ -219,6 +222,7 @@ class ParsedText extends StatelessWidget {
       textAlign: alignment,
       textDirection: textDirection,
       customEllipsis: customEllipsis,
+      layoutCallback: layoutCallback,
       text: TextSpan(
         text: '',
         children: <InlineSpan>[...widgets],
