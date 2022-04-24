@@ -75,6 +75,7 @@ class ExtraRichText extends MultiChildRenderObjectWidget {
     this.strutStyle,
     this.textWidthBasis = TextWidthBasis.parent,
     this.textHeightBehavior,
+    this.customEllipsis,
   })  : assert(maxLines == null || maxLines > 0),
         super(key: key, children: _extractChildren(text));
 
@@ -157,6 +158,8 @@ class ExtraRichText extends MultiChildRenderObjectWidget {
   /// {@macro flutter.dart:ui.textHeightBehavior}
   final ui.TextHeightBehavior? textHeightBehavior;
 
+  final String? customEllipsis;
+
   @override
   RenderExtraParagraph createRenderObject(BuildContext context) {
     assert(textDirection != null || debugCheckHasDirectionality(context));
@@ -172,6 +175,7 @@ class ExtraRichText extends MultiChildRenderObjectWidget {
       textWidthBasis: textWidthBasis,
       textHeightBehavior: textHeightBehavior,
       locale: locale ?? Localizations.maybeLocaleOf(context),
+      customEllipsis: customEllipsis,
     );
   }
 

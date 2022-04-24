@@ -69,6 +69,8 @@ class ParsedText extends StatelessWidget {
   /// Note: Removed support for regexOptions for MatchText and now it uses global regex options.
   final RegexOptions regexOptions;
 
+  final String? customEllipsis;
+
   /// Creates a parsedText widget
   ///
   /// [text] paramtere should not be null and is always required.
@@ -90,6 +92,7 @@ class ParsedText extends StatelessWidget {
     this.onTap,
     this.selectable = false,
     this.regexOptions = const RegexOptions(),
+    this.customEllipsis,
   }) : super(key: key);
 
   @override
@@ -215,6 +218,7 @@ class ParsedText extends StatelessWidget {
       textWidthBasis: textWidthBasis,
       textAlign: alignment,
       textDirection: textDirection,
+      customEllipsis: customEllipsis,
       text: TextSpan(
         text: '',
         children: <InlineSpan>[...widgets],

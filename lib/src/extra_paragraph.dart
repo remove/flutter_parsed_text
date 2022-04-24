@@ -1,5 +1,7 @@
 part of flutter_parsed_text;
 
+typedef LayoutCallback = void Function(TextPainter textPainter);
+
 /// A render object that displays a paragraph of text.
 class RenderExtraParagraph extends RenderBox
     with
@@ -27,11 +29,13 @@ class RenderExtraParagraph extends RenderBox
     ui.TextHeightBehavior? textHeightBehavior,
     List<RenderBox>? children,
     String? customEllipsis,
+    LayoutCallback? layoutCallback,
   })  : assert(text.debugAssertIsValid()),
         assert(maxLines == null || maxLines > 0),
         _softWrap = softWrap,
         _overflow = overflow,
         _ellipsis = customEllipsis ?? _kEllipsis,
+        _layoutCallback = layoutCallback,
         _textPainter = TextPainter(
           text: text,
           textAlign: textAlign,
@@ -63,6 +67,8 @@ class RenderExtraParagraph extends RenderBox
 
   /// Make sure to call after TextPainter layout to get the text over maxLines.
   bool get didExceedMaxLines => _textPainter.didExceedMaxLines;
+
+  LayoutCallback? _layoutCallback;
 
   /// The text to display.
   InlineSpan get text => _textPainter.text!;
@@ -454,6 +460,7 @@ class RenderExtraParagraph extends RenderBox
       minWidth: minWidth,
       maxWidth: widthMatters ? maxWidth : double.infinity,
     );
+    _layoutCallback?.call(_textPainter);
   }
 
   @override
