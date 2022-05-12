@@ -165,11 +165,16 @@ class ParsedText extends StatelessWidget {
           } else if (mapping.renderWidget != null) {
             widget = WidgetSpan(
               alignment: PlaceholderAlignment.middle,
-              child: GestureDetector(
-                onTap: () => mapping.onTap!(matchText),
-                child: mapping.renderWidget!(
-                    text: matchText, pattern: mapping.pattern!),
-              ),
+              child: () {
+                final renderWidget = mapping.renderWidget!(
+                    text: matchText, pattern: mapping.pattern!);
+                return mapping.onTap != null
+                    ? GestureDetector(
+                        onTap: () => mapping.onTap!(matchText),
+                        child: renderWidget,
+                      )
+                    : renderWidget;
+              }(),
             );
           } else {
             widget = TextSpan(
